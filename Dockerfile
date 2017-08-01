@@ -6,7 +6,7 @@ RUN curl -s http://www-eu.apache.org/dist/hadoop/common/hadoop-2.8.1/hadoop-2.8.
 ENV HADOOP_HOME /opt/hadoop
 ENV HADOOP_PREFIX /opt/hadoop
 
-RUN yum -y install openssh openssh-server openssh-clients openssl-libs pdsh && \
+RUN yum -y install openssh openssh-server openssh-clients openssl-libs pdsh which && \
     ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key && \
     ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key && \
     ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa && \
@@ -57,5 +57,7 @@ tail -f /dev/null\n'\
 chmod +x /entrypoint.sh
 
 EXPOSE 50070 8088
+
+WORKDIR /opt/hadoop
 
 ENTRYPOINT /entrypoint.sh
