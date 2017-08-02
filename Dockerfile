@@ -14,35 +14,36 @@ RUN yum -y install which openssh openssh-server openssh-clients openssl-libs pds
     cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys && \
     sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/lib/jvm/java\nexport HADOOP_PREFIX=/opt/hadoop\nexport HADOOP_HOME=/opt/hadoop\n:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh && \
     sed -i '/^export HADOOP_CONF_DIR/ s:.*:export HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop/:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh && \
-    $HADOOP_PREFIX/bin/hdfs namenode -format && \
-    echo $'<configuration>\n\
+    $HADOOP_PREFIX/bin/hdfs namenode -format 
+
+RUN echo $'<configuration>\n\
     <property>\n\
         <name>fs.defaultFS</name>\n\
         <value>hdfs://localhost:9000</value>\n\
     </property>\n\
 </configuration>\n'\
-    > etc/hadoop/core-site.xml  && \
+    > $HADOOP_PREFIX/hadoop/core-site.xml  && \
    echo $'<configuration>\n\
     <property>\n\
         <name>dfs.replication</name>\n\
         <value>1</value>\n\
     </property>\n\
 </configuration>\n'\
-    > etc/hadoop/hdfs-site.xml && \
+    > $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml && \
     echo $'<configuration>\n\
      <property>\n\
         <name>mapreduce.framework.name</name>\n\
         <value>yarn</value>\n\
      </property>\n\
 </configuration>\n'\
-    > etc/hadoop/mapred-site.xml && \
+    > $HADOOP_PREFIX/etc/hadoop/mapred-site.xml && \
     echo $'<configuration>\n\
     <property>\n\
         <name>yarn.nodemanager.aux-services</name>\n\
         <value>mapreduce_shuffle</value>\n\
     </property>\n\
 </configuration>\n'\
-    > etc/hadoop/yarn-site.xml && \
+    > $HADOOP_PREFIX/etc/hadoop/yarn-site.xml && \
     echo $'Host *\n\
   UserKnownHostsFile /dev/null\n\
   StrictHostKeyChecking no\n\
