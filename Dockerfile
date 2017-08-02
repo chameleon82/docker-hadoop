@@ -22,7 +22,7 @@ RUN echo $'<configuration>\n\
         <value>hdfs://localhost:9000</value>\n\
     </property>\n\
 </configuration>\n'\
-    > $HADOOP_PREFIX/hadoop/core-site.xml  && \
+    > $HADOOP_PREFIX/etc/hadoop/core-site.xml  && \
    echo $'<configuration>\n\
     <property>\n\
         <name>dfs.replication</name>\n\
