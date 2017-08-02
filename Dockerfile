@@ -1,12 +1,12 @@
 FROM chameleon82/java
 
 RUN curl -s http://www-eu.apache.org/dist/hadoop/common/hadoop-2.8.1/hadoop-2.8.1.tar.gz | tar -xz -C /opt && \
-    cd /opt && ln -s ./hadoop-2.8.1 hadoop
+    ln -s /opt/hadoop-2.8.1 /opt/hadoop
 
 ENV HADOOP_HOME /opt/hadoop
 ENV HADOOP_PREFIX /opt/hadoop
 
-RUN yum -y install openssh openssh-server openssh-clients openssl-libs pdsh which && \
+RUN yum -y install which openssh openssh-server openssh-clients openssl-libs pdsh && \
     ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key && \
     ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key && \
     ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa && \
