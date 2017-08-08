@@ -12,7 +12,7 @@ RUN yum -y install which openssh openssh-server openssh-clients openssl-libs pds
     ssh-keygen -A && \
     cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys && \
     sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/lib/jvm/java:' $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
-    $HADOOP_PREFIX/bin/hdfs namenode -format 
+    $HADOOP_HOME/bin/hdfs namenode -format 
 
 RUN echo $'<configuration>\n\
     <property>\n\
