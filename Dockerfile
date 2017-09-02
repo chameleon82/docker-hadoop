@@ -1,8 +1,9 @@
 FROM java:8
 
-RUN curl -s http://www-us.apache.org/dist/hadoop/common/hadoop-2.8.1/hadoop-2.8.1.tar.gz | tar -xz -C /opt/
+# Use last stable release
+RUN curl -s http://www-us.apache.org/dist/hadoop/common/hadoop-2.7.4/hadoop-2.7.4.tar.gz | tar -xz -C /opt/
 
-RUN ln -s /opt/hadoop-2.8.1 /usr/local/hadoop
+RUN ln -s /opt/hadoop-2.7.4 /usr/local/hadoop
 
 RUN apt-get update && \
     apt-get -y install ssh pdsh
