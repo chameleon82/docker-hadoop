@@ -28,7 +28,16 @@ WORKDIR /usr/local/hadoop
 
 RUN bin/hdfs namenode -format
 
-# ENV PATH $PATH:$HADOOP_HOME/bin
+ENV PATH $PATH:$HADOOP_HOME/bin
+
+ENV HADOOP_CONF_DIR $PATH:$HADOOP_HOME/etc/hadoop
+
+# Install Spark 2.2.0
+RUN curl -s https://d3kbcqa49mib13.cloudfront.net/spark-2.2.0-bin-hadoop2.7.tgz | tar -xz -C /usr/local && \
+    cd /usr/local && ln -s spark-2.2.0-bin-hadoop2.7 spark 
+
+ENV SPARK_HOME /usr/local/spark
+ENV PATH $PATH:$SPARK_HOME/bin
 
 EXPOSE  8088 8042
 
@@ -62,3 +71,10 @@ CMD bash /entrypoint.sh
 # Datanode    50010               dfs.datanode.address
 # Datanode    50020               dfs.datanode.ipc.address
 # Backupnode  50100               dfs.backup.address
+
+
+# Daemon                   Default Port  Configuration Parameter
+# -----------------------  ------------ ----------------------------------
+# Spark History Server     18080
+
+EXPOSE 18080
