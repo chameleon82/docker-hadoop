@@ -6,7 +6,7 @@ RUN curl -s http://www-us.apache.org/dist/hadoop/common/hadoop-2.7.4/hadoop-2.7.
 RUN ln -s /opt/hadoop-2.7.4 /usr/local/hadoop
 
 RUN apt-get update && \
-    apt-get -y install ssh pdsh
+    apt-get -y install ssh pdsh rsync vim
 
 RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
     cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
