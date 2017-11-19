@@ -30,7 +30,8 @@ RUN bin/hdfs namenode -format
 
 ENV PATH $PATH:$HADOOP_HOME/bin
 
-ENV HADOOP_CONF_DIR $PATH:$HADOOP_HOME/etc/hadoop
+ENV HADOOP_CONF_DIR $HADOOP_HOME/etc/hadoop
+ENV YARN_CONF_DIR $HADOOP_HOME/etc/hadoop
 
 # Install Spark 2.2.0
 RUN curl -s https://d3kbcqa49mib13.cloudfront.net/spark-2.2.0-bin-hadoop2.7.tgz | tar -xz -C /usr/local && \
